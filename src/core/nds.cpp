@@ -23,7 +23,12 @@ bool Nds::load_rom(const std::string& path) {
 }
 
 void Nds::run_frame() {
-    // TODO: scheduler tick + CPU stepping + video rendering.
+    // Placeholder timing: step each CPU for a fixed number of instructions
+    // per frame. Real cycle accounting + scheduler comes in M3.
+    constexpr u32 kArm9StepsPerFrame = 1 * 1024 * 1024;  // ~67 MHz / 60 Hz
+    constexpr u32 kArm7StepsPerFrame =     512 * 1024;   // ~33 MHz / 60 Hz
+    for (u32 i = 0; i < kArm9StepsPerFrame; ++i) arm9_.step();
+    for (u32 i = 0; i < kArm7StepsPerFrame; ++i) arm7_.step();
 }
 
 }  // namespace nds::core

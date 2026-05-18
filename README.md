@@ -5,10 +5,14 @@ Windows frontend.
 
 ## Status
 
-Foundation only. The project builds, opens a window, parses Nintendo DS ROM
-headers, and instantiates ARM7 / ARM9 CPU core stubs. **No game will run
-yet** — instruction execution, video, audio, and I/O still need to be
-implemented. See the roadmap below.
+Foundation + ARM7TDMI interpreter. The project builds, opens a window, parses
+Nintendo DS ROM headers, copies ARM9/ARM7 program code into main RAM, and
+runs the **ARM7TDMI** (ARMv4T) interpreter — full ARM + Thumb decode/execute,
+banked registers, mode switching, SWI/undefined entry. The ARM9 core, video,
+audio, and I/O are still stubs.
+
+The ARM7 interpreter is exercised by a unit-test suite at
+`tests/test_arm7.cpp`; run via `ctest` after building.
 
 ## Building on Windows
 
@@ -64,7 +68,7 @@ BIOS-dependent features land, place `bios9.bin`, `bios7.bin`, and
 
 See [the plan](https://claude.ai/code) for the milestone schedule. Summary:
 
-1. ARM7TDMI interpreter (ARMv4T)
+1. ARM7TDMI interpreter (ARMv4T) — **done** (this commit)
 2. ARM946E-S interpreter (ARMv5TE) + CP15
 3. DMA, timers, IPC, IRQ controller
 4. 2D engines + VRAM mapping
