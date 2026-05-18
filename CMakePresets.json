@@ -1,0 +1,37 @@
+{
+    "version": 3,
+    "cmakeMinimumRequired": { "major": 3, "minor": 20, "patch": 0 },
+    "configurePresets": [
+        {
+            "name": "windows-msvc",
+            "displayName": "Windows (MSVC, x64)",
+            "generator": "Visual Studio 17 2022",
+            "architecture": "x64",
+            "binaryDir": "${sourceDir}/build/windows-msvc",
+            "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" }
+        },
+        {
+            "name": "windows-mingw",
+            "displayName": "Windows (MinGW, Ninja)",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/windows-mingw",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_C_COMPILER": "gcc",
+                "CMAKE_CXX_COMPILER": "g++"
+            }
+        },
+        {
+            "name": "linux",
+            "displayName": "Linux (gcc, Ninja)",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/linux",
+            "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" }
+        }
+    ],
+    "buildPresets": [
+        { "name": "windows-msvc",  "configurePreset": "windows-msvc",  "configuration": "Release" },
+        { "name": "windows-mingw", "configurePreset": "windows-mingw" },
+        { "name": "linux",         "configurePreset": "linux" }
+    ]
+}
